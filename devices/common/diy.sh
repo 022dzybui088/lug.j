@@ -3,7 +3,7 @@
 shopt -s extglob
 
 [ ! -f feeds.conf ] && {
-sed -i '$a src-git kiddin9 https://github.com/dzybui/oppg.git;master' feeds.conf.default
+sed -i '$a src-git kiddin9 https://github.com/022dzybui088/oppg.git;master' feeds.conf.default
 }
 
 sed -i "s?targets/%S/packages?targets/%S/\$(LINUX_VERSION)?" include/feeds.mk
@@ -24,10 +24,10 @@ sed -i "s/procd-ujail//" include/target.mk
 
 sed -i "s/^.*vermagic$/\techo '1' > \$(LINUX_DIR)\/.vermagic/" include/kernel-defaults.mk
 
-status=$(curl -H "Authorization: token $REPO_TOKEN" -s "https://api.github.com/repos/dzybui/oppg/actions/runs" | jq -r '.workflow_runs[0].status')
+status=$(curl -H "Authorization: token $REPO_TOKEN" -s "https://api.github.com/repos/022dzybui088/oppg/actions/runs" | jq -r '.workflow_runs[0].status')
 while [ "$status" == "in_progress" ];do
 	sleep 5
-	status=$(curl -H "Authorization: token $REPO_TOKEN" -s "https://api.github.com/repos/dzybui/oppg/actions/runs" | jq -r '.workflow_runs[0].status')
+	status=$(curl -H "Authorization: token $REPO_TOKEN" -s "https://api.github.com/repos/022dzybui088/oppg/actions/runs" | jq -r '.workflow_runs[0].status')
 done
 
 mv -f feeds/kiddin9/{r81*,igb-intel} tmp/
